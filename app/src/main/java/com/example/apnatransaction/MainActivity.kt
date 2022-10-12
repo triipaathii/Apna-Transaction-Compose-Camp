@@ -4,6 +4,9 @@ import android.graphics.Paint.Style
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -87,16 +90,23 @@ fun TransactionItem(modifier: Modifier = Modifier) {
             .clickable { expanded = !expanded }
     ) {
         Column(
-            modifier = modifier.padding(16.dp)
+            modifier = Modifier
+                .padding(top = 16.dp, end = 16.dp, start = 16.dp)
+                .animateContentSize(
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                        stiffness = Spring.StiffnessLow
+                    )
+                )
         ) {
             Row(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                Surface(
                    color = Color.Cyan,
-                   modifier = modifier
+                   modifier = Modifier
                        .size(75.dp)
                        .clip(RoundedCornerShape(100.dp))
                ) {
@@ -107,7 +117,7 @@ fun TransactionItem(modifier: Modifier = Modifier) {
                            .wrapContentSize(Alignment.Center)
                    )
                }
-                Spacer(modifier = modifier.width(16.dp))
+                Spacer(modifier = Modifier.width(16.dp))
                 Column() {
                     Text(
                         text = "Patanjali",
@@ -115,10 +125,10 @@ fun TransactionItem(modifier: Modifier = Modifier) {
                     )
                     Text(text = "Oct 10, 2022")
                 }
-                Spacer(modifier = modifier.weight(1f))
+                Spacer(modifier = Modifier.weight(1f))
                 IconButton(
                     onClick = { /*TODO*/ },
-                    modifier = modifier,
+                    modifier = Modifier,
                     ) {
                     Icon(
                         Icons.Filled.Delete,
@@ -127,10 +137,11 @@ fun TransactionItem(modifier: Modifier = Modifier) {
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(16.dp))
             if(expanded) {
-                Spacer(modifier = modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 Divider(color = Color.Gray, thickness = 2.dp)
-                Spacer(modifier = modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(
                     text = "DESCRIPTION",
                     fontWeight = FontWeight.Bold
@@ -142,6 +153,7 @@ fun TransactionItem(modifier: Modifier = Modifier) {
                             " b : an action or activity involving two parties or things that " +
                             "reciprocally affect or influence each other."
                 )
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
         }
