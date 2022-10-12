@@ -40,15 +40,33 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ApnaTransaction() {
-    Column() {
-        WeekChart()
-        TransactionList()
+    Scaffold(
+        topBar = {
+            AppTopBar()
+        }
+    ) {
+        Column() {
+            WeekChart()
+            TransactionList()
+        }
     }
 
 }
 
 @Composable
-fun TransactionList(){
+fun AppTopBar(modifier: Modifier = Modifier){
+    Text(
+        text = "Apna Transaction",
+        fontWeight = FontWeight.Bold,
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentWidth(Alignment.CenterHorizontally)
+            .padding(16.dp)
+    )
+}
+
+@Composable
+private fun TransactionList(){
     LazyColumn{
         items(10){
             TransactionItem()
@@ -154,7 +172,6 @@ fun DayChart(modifier: Modifier = Modifier) {
             ){}
             Surface (
                 color = Color.Magenta,
-
                 modifier = modifier
                     .height(25.dp)
                     .width(10.dp)
