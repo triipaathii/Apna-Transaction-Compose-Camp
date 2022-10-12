@@ -4,6 +4,7 @@ import android.graphics.Paint.Style
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,7 +40,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ApnaTransaction() {
-    TransactionList()
+    Column() {
+        WeekChart()
+        TransactionList()
+    }
 
 }
 
@@ -107,25 +111,59 @@ fun TransactionItem(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun WeekChart() {
-    Card() {
-        Row() {
-
+fun WeekChart(modifier: Modifier = Modifier) {
+    Card(
+        elevation = 5.dp,
+        modifier = modifier
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+            .fillMaxWidth()
+    ) {
+        Row (
+            modifier = modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ){
+            DayChart()
+            DayChart()
+            DayChart()
+            DayChart()
+            DayChart()
+            DayChart()
+            DayChart()
         }
     }
 }
 
 @Composable
-fun DayChart() {
-    Column() {
+fun DayChart(modifier: Modifier = Modifier) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
             text = "\u20B955"
         )
         Box() {
             Surface (
-                color = Color.Gray
+                color = Color.Gray,
+                border = BorderStroke(color = Color.Black, width = 1.dp),
+                modifier = modifier
+                    .height(100.dp)
+                    .width(10.dp)
+                    .clip(RoundedCornerShape(50.dp))
+            ){}
+            Surface (
+                color = Color.Magenta,
+
+                modifier = modifier
+                    .height(25.dp)
+                    .width(10.dp)
+                    .clip(RoundedCornerShape(50.dp))
             ){}
         }
+        Text(
+            text = "M"
+        )
     }
 }
 
