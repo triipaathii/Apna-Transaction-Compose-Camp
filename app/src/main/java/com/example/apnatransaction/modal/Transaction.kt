@@ -1,10 +1,10 @@
 package com.example.apnatransaction.modal
 
-import java.util.Date
+import java.util.*
 
 data class Transaction(
-    val amountRes: Int,
-    val titleRes: Int,
+    val amount: String,
+    val title: String,
     val dateChosen: Date,
     val description: String? = null
 )
