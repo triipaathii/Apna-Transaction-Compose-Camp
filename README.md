@@ -16,6 +16,16 @@ As well as planning future transactions, this application also keeps track of pa
 *  The amount of money spent on each day during the past seven days is displayed to the user.
 * The user can compare the daily expenditure as the data is displayed graphically.
 
+## Functionality & Concepts used:
+
+Apna Transaction is a custom application developed specifically on the basis of the Android Jetpack libraries.
+* Lazy column
+* Animation
+* Material Theming: Light and dark; shape modification; typography.
+* Lambda expressions:- high-order functions
+* Date Picker
+* Data Class
+
 ## Future Scope
 Having the ability to link this application with other sources and applications will give this application a vast horizon in the future. 
 * In addition, we will create a graphic representation of the transaction.
@@ -26,5 +36,5 @@ Having the ability to link this application with other sources and applications 
 * In addition, we want to extend the application with a unique feature that allows groups to split transactions between members.
  
 
- 
+
 
