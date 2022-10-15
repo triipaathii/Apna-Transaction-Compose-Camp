@@ -15,6 +15,15 @@ As well as planning future transactions, this application also keeps track of pa
 * Students are provided with the option to keep a record of their expenditures every week..
 *  The amount of money spent on each day during the past seven days is displayed to the user.
 * The user can compare the daily expenditure as the data is displayed graphically.
+
+## Future Scope
+Having the ability to link this application with other sources and applications will give this application a vast horizon in the future. 
+* In addition, we will create a graphic representation of the transaction.
+* Along with this regular balance, checks will provide an easy way to budget and save.
+* Users can set financial goals and set them to be completed within a specified time frame.
+* Students, freelancers, and part-time workers would also be able to use the application if it was added to credit and debit transactions.
+* Our application will also be connected to Firebase in the future for online data storage and enhanced transparency.
+* In addition, we want to extend the application with a unique feature that allows groups to split transactions between members.
  
 
  
