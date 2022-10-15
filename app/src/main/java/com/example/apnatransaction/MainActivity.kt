@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.apnatransaction.modal.Transaction
 import com.example.apnatransaction.ui.theme.ApnaTransactionTheme
-import transactionList
 import java.util.*
 
 class MainActivity : ComponentActivity() {
@@ -46,18 +45,64 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ApnaTransaction() {
+    val list: MutableList<Transaction> = mutableListOf();
+//    val tempList = remember { mutableStateListOf(list) }
+    val tempList: MutableList<Transaction> = mutableListOf(
+        Transaction(
+            title = "Movie - Vikram Vedha",
+            amount = "1355",
+            dateChosen = "14/10/2022",
+        ),
+        Transaction(
+            title = "CSE Books",
+            amount = "555",
+            dateChosen = "13/10/2022",
+            description = "1.Ada - R.K. Singh\n2.DSA - Interview Questions"
+        ),
+        Transaction(
+            title = "Cafeteria",
+            amount = "210",
+            dateChosen = "13/10/2022",
+            description = "5 samosa, 3 chai, 2 Maaza"
+        ),
+        Transaction(
+            title = "Cafeteria",
+            amount = "110",
+            dateChosen = "11/10/2022",
+        ),
+        Transaction(
+            title = "Ice Cream",
+            amount = "40",
+            dateChosen = "11/10/2022",
 
-    val tempList = remember { mutableStateListOf(transactionList) }
+        ),
+        Transaction(
+            title = "Science City",
+            amount = "120",
+            dateChosen = "9/10/2022",
+        ),
+        Transaction(
+            title = "Lunch",
+            amount = "300",
+            dateChosen = "9/10/2022",
+        ),
+        Transaction(
+            title = "Bus",
+            amount = "250",
+            dateChosen = "9/10/2022",
+        )
+
+    )
     Scaffold(
-        floatingActionButton = {
-            BottomAddButton()
-        },
+//        floatingActionButton = {
+//            BottomAddButton()
+//        },
     ) {
         LazyColumn {
             item { AppTopBar() }
             item { UserInput() }
-            items(transactionList.size) { index ->
-                TransactionItem(modifier = Modifier, transactionList[index])
+            items(tempList.size) { index ->
+                TransactionItem(modifier = Modifier, tempList[index])
             }
         }
 
@@ -68,10 +113,10 @@ fun ApnaTransaction() {
 @Composable
 fun UserInput() {
 
-
     var title by remember { mutableStateOf("") }
     var amount by remember { mutableStateOf("") }
     val date = remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
 
     //pick date
     val mContext = LocalContext.current
@@ -96,55 +141,73 @@ fun UserInput() {
     )
 
     //----------------- UI------------------
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+    Card(
+        elevation = 4.dp,
+        modifier = Modifier
+            .padding(16.dp)
     ) {
-        //title
-        OutlinedTextField(
-            value = title,
-            onValueChange = {title = it},
-            placeholder = { Text(text = "Title") }
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        //amount
-        OutlinedTextField(
-            value = amount,
-            onValueChange = {amount = it},
-            placeholder = { Text(text = "Amount") }
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        //date
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically
+        Column(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            Text(
-                text = " Date: ${date.value}",
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center
+            //title
+            OutlinedTextField(
+                value = title,
+                onValueChange = { title = it },
+                placeholder = { Text(text = "Title") },
+                label = {Text(text = "Title")}
             )
 
-            Button(
-                onClick = { mDatePickerDialog.show() },
+            Spacer(modifier = Modifier.height(12.dp))
+
+            //amount
+            OutlinedTextField(
+                value = amount,
+                onValueChange = { amount = it },
+                placeholder = { Text(text = "Amount") },
+                label = {Text(text = "Amount") }
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // description
+            OutlinedTextField(
+                value = description,
+                onValueChange = { description = it },
+                placeholder = { Text(text = "Description") },
+                label = {Text(text = "Description")}
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            //date
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Choose Date", color = Color.White)
+
+                Text(
+                    text = " Date: ${date.value}",
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center
+                )
+
+                Button(
+                    onClick = { mDatePickerDialog.show() },
+                ) {
+                    Text(text = "Choose Date", color = Color.White)
+                }
+
+
             }
 
+            Spacer(modifier = Modifier.height(12.dp))
 
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        //add button
-        Button(onClick = { addTransaction(title,amount,date) }) {
-            Text(text = "Add Transaction")
+            //add button
+            Button(onClick = { addTransaction(title, amount, date.toString(), addItem = {}) }) {
+                Text(text = "Add Transaction")
+            }
         }
     }
 }
@@ -179,7 +242,7 @@ fun AppTopBar(modifier: Modifier = Modifier) {
         Text(
             text = "Apna Transaction",
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF3F0071),
+            color = MaterialTheme.colors.primary,
             fontSize = 25.sp,
             modifier = modifier
                 .fillMaxWidth()
@@ -191,13 +254,13 @@ fun AppTopBar(modifier: Modifier = Modifier) {
 }
 
 
-fun addTransaction(title: String, amount: String, date: MutableState<String>) {
+fun addTransaction(title: String, amount: String, date: String, addItem: () -> Unit) {
     val temp = Transaction(
         title = title,
         amount = amount,
         dateChosen = date
     )
-    transactionList.add(temp)
+    addItem()
 }
 
 @Preview(showBackground = true)

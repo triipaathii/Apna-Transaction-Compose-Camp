@@ -3,7 +3,6 @@ package com.example.apnatransaction
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -49,8 +48,8 @@ fun TransactionItem(modifier: Modifier = Modifier, transaction: Transaction) {
                 Surface(
                     modifier = Modifier
                         .size(75.dp)
-                        .background(MaterialTheme.colors.background)
-                        .clip(RoundedCornerShape(100.dp))
+                        .clip(RoundedCornerShape(100.dp)),
+                    color = MaterialTheme.colors.primary
                 ) {
                     Text(
                         text = "\u20B9${amount}",
@@ -65,7 +64,7 @@ fun TransactionItem(modifier: Modifier = Modifier, transaction: Transaction) {
                         text = transaction.title,
                         fontWeight = FontWeight.Bold
                     )
-                    Text(text = "Oct 10, 2022")
+                    Text(text = transaction.dateChosen)
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 IconButton(
@@ -91,6 +90,7 @@ fun TransactionItem(modifier: Modifier = Modifier, transaction: Transaction) {
                 Text(
                     text = when(transaction.description){
                         null -> "\nNo description provided"
+                        "" -> "\nNo description provided"
                         else -> "\n${transaction.description}"
                     }
                 )
