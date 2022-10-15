@@ -14,7 +14,11 @@ A comprehensive application to manage the budget in daily life by calculating th
 As well as planning future transactions, this application also keeps track of past transactions.
 * Students are provided with the option to keep a record of their expenditures every week..
 *  The amount of money spent on each day during the past seven days is displayed to the user.
-* The user can compare the daily expenditure as the data is displayed graphically.
+
+## Preview Screenshots
+<p align="center"><img src="https://user-images.githubusercontent.com/77115663/196002945-3ff9a56c-0aa2-48fc-bf9f-c86a70d2e57d.jpg" width=250 height=500>&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://user-images.githubusercontent.com/77115663/196002948-5ebeaacd-d4df-4564-94c6-bf9a9a87d355.jpg" width=250 height=500>&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://user-images.githubusercontent.com/77115663/196002954-337b2d7e-ca3c-4157-899f-74db499319a3.jpg" width=250 height=500></p>
+
+<p align="center"><img src="https://user-images.githubusercontent.com/77115663/196002956-a2759475-a325-441b-ba8b-4f9529aa8f1f.jpg" width=250 height=500>&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://user-images.githubusercontent.com/77115663/196002963-303c1657-63d2-4582-b486-fac0e6fda7b6.jpg" width=250 height=500>&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://user-images.githubusercontent.com/77115663/196002969-fd26e816-8b2f-4f05-9396-09dbbaf4427f.jpg" width=250 height=500></p>
 
 ## Functionality & Concepts used:
 
