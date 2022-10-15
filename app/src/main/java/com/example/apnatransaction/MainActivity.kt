@@ -12,7 +12,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.apnatransaction.modal.Transaction
 import com.example.apnatransaction.ui.theme.ApnaTransactionTheme
+import java.util.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +44,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ApnaTransaction() {
-    var transactionList: MutableList<Transaction> by remember {
-        mutableStateListOf()
-    }
+    val temp = Transaction("230.0", "hello", Date(2022, 2, 4), "nothing")
+    val temp1 = Transaction("230.0", "hello", Date(2022, 2, 4), "nothing")
+    val transactionList = remember { mutableStateListOf(temp, temp1) }
 
     Scaffold(
         floatingActionButton = {
@@ -56,8 +56,8 @@ fun ApnaTransaction() {
         LazyColumn {
             item { AppTopBar() }
             item { WeekChart() }
-            items(10){
-                TransactionItem()
+            items(transactionList.size) { index ->
+                TransactionItem(modifier = Modifier, transactionList[index])
             }
         }
 
@@ -75,7 +75,7 @@ fun BottomAddButton(modifier: Modifier = Modifier){
             .clip(RoundedCornerShape(65.dp))
     ) {
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = { },
             modifier = Modifier
         ) {
             Icon(Icons.Filled.Add, tint = Color.White, contentDescription = null)
@@ -84,13 +84,13 @@ fun BottomAddButton(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun AppTopBar(modifier: Modifier = Modifier){
-    Row (
+fun AppTopBar(modifier: Modifier = Modifier) {
+    Row(
         modifier = modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
-            ){
+    ) {
 
         Text(
             text = "Apna Transaction",
